@@ -16,5 +16,8 @@ public class Main4 {
         System.out.println(content);
 
         System.out.println(Arrays.toString("con tent".split(" ")));
+        char a1 = '$';
+        int b1 = a1;
+        System.out.println(b1);
     }
 }
