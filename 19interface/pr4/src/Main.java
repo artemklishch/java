@@ -4,6 +4,6 @@ public class Main {
     public static void main(String[] args) {
         Car car = new Car();
         Car.Builder builder = new Car.Builder();
-        Car.Inner inner = car.new Inner();
+        Car.Inner inner = car.new Inner();\
     }
 }
