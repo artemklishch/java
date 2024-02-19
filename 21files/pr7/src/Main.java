@@ -18,6 +18,7 @@ public class Main {
         System.out.println("======= .");
         Path parentDir = Paths.get(".");
         System.out.println(parentDir.toAbsolutePath().toString());
+        System.out.println(parentDir.toAbsolutePath());
         System.out.println(parentDir);
 
         System.out.println("======= ./files");

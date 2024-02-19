@@ -28,5 +28,7 @@ public class Main {
         File file2 = new File("users2.txt");
         Path path = file2.toPath();
         File toFile = path.toFile();
+        System.out.println(path);
+        System.out.println(toFile);
     }
 }
