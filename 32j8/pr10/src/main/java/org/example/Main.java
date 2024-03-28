@@ -26,9 +26,9 @@ public class Main {
         // consumer
         Consumer<String> sout = System.out::println;
         List<String> names = List.of("Bob", "Alice", "John");
-//        for (String name: names) {
-//            sout.accept(name);
-//        }
+        // for (String name: names) {
+        // sout.accept(name);
+        // }
         names.forEach(sout); // дeфолтний метод
 
         // supplier
@@ -40,7 +40,7 @@ public class Main {
             @Override
             public String apply(String s) {
                 if (s == null) {
-                    throw new RuntimeException(); //  we can throw only unchecked exceptions
+                    throw new RuntimeException(); // we can throw only unchecked exceptions
                 }
                 return s.toUpperCase();
             }
