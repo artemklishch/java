@@ -45,7 +45,7 @@ public class User {
         if (user == null) {
             return false;
         }
-        // symmetric: if a.equals(b) is true, b.equals(b) must be true
+        // symmetric: if a.equals(b) is true, b.equals(a) must be true
         // transitive: if a.equals(b) is true and b.equals(c) is true, c.equals(a) must be true
         // consistent: multiple invocations of equals() must return the same
 //        if (user.getClass().equals(User.class)) { // it doesn't work for cases when one class inherits another class
