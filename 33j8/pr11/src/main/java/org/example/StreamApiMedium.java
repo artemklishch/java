@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 import java.util.Set;
 
@@ -45,9 +47,21 @@ public class StreamApiMedium {
      * (100001)
      */
     public String convertAndModifyNumbers(List<Integer> numbers) {
+//        return numbers.stream()
+//                .map(n -> "(" + Integer.toBinaryString(n) + ")" + System.lineSeparator())
+//                .reduce("", (acc, value) -> acc + value);
+
         return numbers.stream()
                 .map(n -> "(" + Integer.toBinaryString(n) + ")")
-                .reduce("", (acc, value) -> acc + value);
+                .collect(Collectors.joining(System.lineSeparator()));
+
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append("[");
+//        numbers.stream()
+//                .map(n -> "(" + Integer.toBinaryString(n) + ")")
+//                .forEach(stringBuilder::append);
+//        stringBuilder.append("]");
+//        return stringBuilder.toString();
     }
 
     /**
@@ -56,8 +70,11 @@ public class StreamApiMedium {
      * passed with the second input param - 'increment'
      */
     public String charsIncrementation(String string, int increment) {
-        System.out.println(string.chars().map(v -> v + increment).mapToObj(c -> (char) c).collect(Collectors.joining(",")));
-        return "";
+        StringBuilder stringBuilder = new StringBuilder();
+        string.chars()
+                .map(v -> v + increment)
+                .mapToObj(c -> (char) c).forEach(v -> stringBuilder.append(v));
+        return stringBuilder.toString();
     }
 
     /**
@@ -65,6 +82,23 @@ public class StreamApiMedium {
      * {"99:Johny", "20:Brad", ...} return the age of the oldest person
      */
     public Long getOldestPersonAge(List<String> people) {
-        return 0L;
+//        long maxAge = 0L;
+//        people.stream()
+//                .max(s -> Long.parseLong(s.split(":")[0]))
+//                .forEach(v -> {
+//                    long maxAge = 0L;
+//                    if (v > maxAge) {
+//                        maxAge = v;
+//                    }
+//                });
+//        return maxAge;
+        if (people.isEmpty()) {
+            throw new NoSuchElementException("Empty list");
+        }
+        List<String> strings = people.stream()
+                .map(s -> s.split(":")[0])
+                .sorted()
+                .collect(Collectors.toList());
+        return Long.parseLong(strings.get(strings.size() - 1));
     }
 }

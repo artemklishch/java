@@ -19,10 +19,16 @@ public class Main {
         income.put("Odyssey", 9640);
         System.out.println(streamApiMedium.getCompanies(income));
 
-        List<Integer> numbers = List.of(1, 20, 33);
+        List<Integer> numbers = List.of(1, 3, 5, 8);
         System.out.println(streamApiMedium.convertAndModifyNumbers(numbers));
 
         System.out.println(streamApiMedium.charsIncrementation("Hello", 1));
+
+//        List<String> people2 = List.of("99:Johny", "20:Brad");
+        List<String> people2 = List.of();
+        System.out.println(streamApiMedium.getOldestPersonAge(people2));
+
+//        System.out.println(Long.parseLong("222"));
 
     }
 }
