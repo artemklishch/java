@@ -15,12 +15,17 @@ public class StreamApiAdvanced {
      * numbers that can be divided by 5 without a remainder.
      */
     public List<Integer> filterAndReverse(int[] inputNumbers) {
+//        return Arrays.stream(inputNumbers)
+//                .boxed()
+//                .filter(n -> n % 5 == 0)
+//                .sorted()
+//                .collect(Collectors.toList())
+//                .reversed();
         return Arrays.stream(inputNumbers)
                 .boxed()
                 .filter(n -> n % 5 == 0)
-                .sorted()
-                .collect(Collectors.toList())
-                .reversed();
+                .sorted((a, b) -> b - a)
+                .collect(Collectors.toList());
     }
 
     /**
