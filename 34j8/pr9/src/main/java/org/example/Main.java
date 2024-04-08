@@ -46,6 +46,8 @@ public class Main {
 
         System.out.println(dateTimeApi.getDateInSpecificTimeZone("2020-04-16T15:23:01Z","Asia/Tokyo"));
 //        System.out.println(LocalDateTime.parse("2020-04-16T15:23:01").plusHours(9));
+        var d = "Heklo";
+        System.out.println(d);
 
     }
 
