@@ -1,0 +1,16 @@
+2024-04-25 22:24:50,103 INFO org.example.services.AuthenticationServiceImpl login method was called
+2024-04-25 22:24:50,105 INFO org.example.services.AuthenticationServiceImpl login method was called
+2024-04-25 22:24:50,105 INFO org.example.services.AuthenticationServiceImpl login method was called
+2024-04-25 22:24:50,105 INFO org.example.services.AuthenticationServiceImpl login method was called
+2024-04-25 22:25:42,982 INFO org.example.services.AuthenticationServiceImpl:14 login method was called
+2024-04-25 22:25:42,984 INFO org.example.services.AuthenticationServiceImpl:15 login method was called
+2024-04-25 22:25:42,984 INFO org.example.services.AuthenticationServiceImpl:16 login method was called
+2024-04-25 22:25:42,984 INFO org.example.services.AuthenticationServiceImpl:17 login method was called
+2024-04-25 22:28:17,242 INFO org.example.services.AuthenticationServiceImpl:14 login method was called. Params: login = bill
+2024-04-25 22:31:20,790 INFO org.example.services.AuthenticationServiceImpl:14 login method was called. Params: login = bill
+2024-04-25 22:31:51,396 INFO org.example.services.AuthenticationServiceImpl:14 login method was called. Params: login = billy
+2024-04-25 22:32:24,884 INFO org.example.services.AuthenticationServiceImpl:14 login method was called. Params: login = bill
+2024-04-25 22:32:24,886 ERROR org.example.Main:19 Can't login
+org.example.exceptions.AuthenticationException: Username or password are incorrect!
+	at org.example.services.AuthenticationServiceImpl.login(AuthenticationServiceImpl.java:21) ~[classes/:?]
+	at org.example.Main.main(Main.java:17) [classes/:?]

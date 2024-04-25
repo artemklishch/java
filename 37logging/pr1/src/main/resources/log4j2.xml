@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config" status="info">
+<!--    тут ми конфігуруємо:
+- вивід в консоль;
+- записування в файл
+- паттерн тег містить інформацію про час, рівень, класс та саме повідомлення
+- значення атрибуту name повинні співпадати з відповіним атрибутом в тегу Loggers
+- org.example в імені логеру означає назву того реального пакету, ощ є в папці java - означає, що
+будь-які логи, які генеруються вв цьому пакеті або вкладених пакетах - будуть логуватись
+у відповідний аппендер тег, що нижче
+інші повідомлення будуть логуватись згідно тегу нижче з іменем error
+-->
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:SSS} %-5level %logger{36} - %msg%n" />
+        </Console>
+        <File name="LogToFile" fileName="logs/app.log">
+            <PatternLayout>
+                <Pattern>%d %p %c %m%n</Pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.example" level="info" additivity="false">
+            <AppenderRef ref="LogToFile" />
+            <AppenderRef ref="LogToConsole" />
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="LogToFile" />
+            <AppenderRef ref="LogToConsole" />
+        </Root>
+    </Loggers>
+</Configuration>
