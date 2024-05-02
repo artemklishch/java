@@ -1,5 +1,6 @@
 package org.example;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -7,6 +8,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Main {
     private static final DecimalFormat decfor = new DecimalFormat("0.00");
@@ -70,7 +72,13 @@ public class Main {
 
 //        System.out.println(getMinValue(new int[]{6, 7, 8, 7, 6, 6}));
 
-        System.out.println(reverseWords("Reverse these words"));
+//        System.out.println(reverseWords("Reverse these words"));
+
+//        System.out.println(breakCamelCase("camelCasingFoo"));
+
+//        System.out.println(isDisarium(135));
+
+        System.out.println(isSubstring("Something", "Home"));
     }
 
     public static double roundToHundredth(double num) {
@@ -321,12 +329,18 @@ public class Main {
     public static Integer calculateTip(double amount, String rating) {
         String ratingToCompare = rating.toLowerCase();
         switch (ratingToCompare) {
-            case "terrible": return (int) Math.ceil(amount * 0);
-            case "poor": return (int) Math.ceil(amount * 0.05);
-            case "good": return (int) Math.ceil(amount * 0.1);
-            case "great": return (int) Math.ceil(amount * 0.15);
-            case "excellent": return (int) Math.ceil(amount * 0.2);
-            default: return null;
+            case "terrible":
+                return (int) Math.ceil(amount * 0);
+            case "poor":
+                return (int) Math.ceil(amount * 0.05);
+            case "good":
+                return (int) Math.ceil(amount * 0.1);
+            case "great":
+                return (int) Math.ceil(amount * 0.15);
+            case "excellent":
+                return (int) Math.ceil(amount * 0.2);
+            default:
+                return null;
         }
 //        String ratingToCompare = rating.toLowerCase();
 //        return switch (ratingToCompare) {
@@ -347,5 +361,58 @@ public class Main {
             }
         }
         return sum;
+    }
+
+    public static int countOccurrences(String string, char letter) {
+        int number = 0;
+        String comparingLetter = String.valueOf(letter);
+        for (String strLetter : string.split("")) {
+            if (strLetter.equals(comparingLetter)) {
+                number++;
+            }
+        }
+        return number;
+    }
+
+    public static String breakCamelCase(String input) {
+        if (input.isEmpty()) {
+            return input;
+        }
+        String[] comparingLettersArray = input.toUpperCase().split("");
+        String[] lettersArray = input.split("");
+        List<String> subStrings = new ArrayList<>();
+        int startIndex = 0;
+        for (int i = 0; i < comparingLettersArray.length; i++) {
+            if (comparingLettersArray[i].equals(lettersArray[i])) {
+                subStrings.add(input.substring(startIndex, i));
+                startIndex = i;
+            }
+        }
+        subStrings.add(input.substring(startIndex));
+        return String.join(" ", subStrings);
+    }
+
+    public static boolean isDisarium(int number) {
+        String[] numberSymbols = String.valueOf(number).split("");
+        double sum = IntStream.range(0, numberSymbols.length)
+                .mapToDouble(i -> Math.pow(Integer.parseInt(numberSymbols[i]), i + 1))
+                .reduce(0, Double::sum);
+        return sum == number;
+    }
+
+    public static boolean isSubstring(String word1, String word2) {
+        String[] word1Letters = word1.toLowerCase().split("");
+        String word2ToCompare = word2.toLowerCase();
+        for (int i = 0; i < word1Letters.length; i++) {
+            boolean isSubstring = false;
+            if (i + 1 < word1Letters.length) {
+                String subStr = word1Letters[i] + word1Letters[i +1];
+                isSubstring = word2ToCompare.contains(subStr);
+            }
+            if (isSubstring) {
+                return true;
+            }
+        }
+        return false;
     }
 }
