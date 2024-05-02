@@ -3,10 +3,7 @@ package org.example;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -51,7 +48,29 @@ public class Main {
 //        System.out.println(whoLikesIt(new String[]{"Alex", "Jacob", "Mark", "Max"}));
 //        System.out.println(whoLikesIt(new String[]{}));
 
-        System.out.println(reverseBitsToInteger(417));
+//        System.out.println(reverseBitsToInteger(417));
+
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(534976));
+
+//        System.out.println(IPAddresses.countIPBetween("20.0.0.10", "20.0.1.0"));
+//        int[][] m = new int[][]{
+//                {-2, 31, 6, 7},
+//                {15, -42, 1, 0},
+//                {9, -7, 12, 19},
+//        };
+//        System.out.println(m.length);
+
+//        System.out.println(makeSentence(new String[]{"mate", "academy"}));
+
+//        System.out.println(getMaxNumber(213));
+
+//        System.out.println(replaceDots("one.two.three"));
+
+//        System.out.println(highAndLow("1 2 3 4 5"));
+
+//        System.out.println(getMinValue(new int[]{6, 7, 8, 7, 6, 6}));
+
+        System.out.println(reverseWords("Reverse these words"));
     }
 
     public static double roundToHundredth(double num) {
@@ -198,5 +217,135 @@ public class Main {
             }
         }
         return estimation;
+    }
+
+    public static int[][] addSquareMatrices(int[][] a, int[][] b) {
+        int firstLevelLength = java.lang.Math.min(a.length, b.length);
+        int secondFirstArrayLength = a.length > 0 ? a[0].length : 0;
+        int secondSecondArrayLength = b.length > 0 ? b[0].length : 0;
+        int secondLevelLength = java.lang.Math.min(secondFirstArrayLength, secondSecondArrayLength);
+        int[][] result = new int[firstLevelLength][secondLevelLength];
+        for (int i = 0; i < firstLevelLength; i++) {
+            for (int j = 0; j < secondLevelLength; j++) {
+                result[i][j] = a[i][j] + b[i][j];
+            }
+        }
+        return result;
+    }
+
+    public static String stringify(int size) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            if (i % 2 == 0) {
+                res.append(1);
+            } else {
+                res.append(0);
+            }
+        }
+        return res.toString();
+    }
+
+    public static int multiplyNumber(int num) {
+        if (num % 2 == 0) {
+            return num * 8;
+        } else {
+            return num * 9;
+        }
+    }
+
+    public static String makeSentence(String[] words) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < words.length; i++) {
+            if (i == 0) {
+                stringBuilder.append(words[i]);
+            } else {
+                stringBuilder.append(" ").append(words[i]);
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String findNeedle(Object[] haystack) {
+        for (int i = 0; i < haystack.length; i++) {
+            if (haystack[i] != null && haystack[i].equals("needle")) {
+                return "found the needle at position " + i;
+            }
+        }
+        return null;
+    }
+
+    public static long getMaxNumber(long num) {
+        String numbers = Arrays.stream(String.valueOf(num).split(""))
+                .map(Integer::parseInt)
+                .sorted((a, b) -> b - a)
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+        return Long.parseLong(numbers);
+    }
+
+    ;
+
+    public static String replaceDots(final String str) {
+        return str.replaceAll("\\.", "-");
+    }
+
+    public static String highAndLow(String numbers) {
+        Integer maxNum = Arrays.stream(numbers.split(" "))
+                .map(Integer::parseInt)
+                .max(Integer::compare).get();
+        Integer minNum = Arrays.stream(numbers.split(" "))
+                .map(Integer::parseInt)
+                .min(Integer::compare).get();
+        return maxNum + " " + minNum;
+    }
+
+    public static int getMinValue(int[] nums) {
+        String number = Arrays.stream(nums)
+                .boxed()
+                .collect(Collectors.toSet())
+                .stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+        return Integer.parseInt(number);
+    }
+
+    public static String reverseWords(final String string) {
+        if (string.replaceAll(" ", "").isEmpty()) {
+            return string;
+        }
+        return Arrays.stream(string.split(" "))
+                .map(v -> new StringBuilder().append(v).reverse())
+                .collect(Collectors.joining(" "));
+    }
+
+    public static Integer calculateTip(double amount, String rating) {
+        String ratingToCompare = rating.toLowerCase();
+        switch (ratingToCompare) {
+            case "terrible": return (int) Math.ceil(amount * 0);
+            case "poor": return (int) Math.ceil(amount * 0.05);
+            case "good": return (int) Math.ceil(amount * 0.1);
+            case "great": return (int) Math.ceil(amount * 0.15);
+            case "excellent": return (int) Math.ceil(amount * 0.2);
+            default: return null;
+        }
+//        String ratingToCompare = rating.toLowerCase();
+//        return switch (ratingToCompare) {
+//            case "terrible" -> (int) Math.ceil(amount * 0);
+//            case "poor" -> (int) Math.ceil(amount * 0.05);
+//            case "good" -> (int) Math.ceil(amount * 0.1);
+//            case "great" -> (int) Math.ceil(amount * 0.15);
+//            case "excellent" -> (int) Math.ceil(amount * 0.2);
+//            default -> null;
+//        };
+    }
+
+    public static int getSumOfElements(int[][] matrix) {
+        int sum = 0;
+        for (int[] array : matrix) {
+            for (int number : array) {
+                sum += number;
+            }
+        }
+        return sum;
     }
 }
