@@ -1,10 +1,14 @@
 package org.example;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -52,7 +56,18 @@ public class Main {
 
 //        System.out.println(reverseBitsToInteger(417));
 
-//        System.out.println(NextBiggerNumber.getNextBiggerNumber(534976));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(534976));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(17));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(528));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(6008));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(2));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(33));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(975));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(20550));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(1283331765));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(514));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(377));
+        System.out.println(NextBiggerNumber.getNextBiggerNumber(992575701));
 
 //        System.out.println(IPAddresses.countIPBetween("20.0.0.10", "20.0.1.0"));
 //        int[][] m = new int[][]{
@@ -78,7 +93,17 @@ public class Main {
 
 //        System.out.println(isDisarium(135));
 
-        System.out.println(isSubstring("Something", "Home"));
+//        System.out.println(isSubstring("Something", "Home"));
+
+//        System.out.println(calculateTotalTime(new int[]{5, 3, 4}, 1)); // 12
+//        System.out.println(calculateTotalTime(new int[]{5, 3, 4}, 3)); // 5
+//        System.out.println(calculateTotalTime(new int[]{10, 2, 3, 3}, 2)); // 10
+//        System.out.println(calculateTotalTime(new int[]{2, 3, 10}, 2)); // 12
+//        System.out.println(calculateTotalTime(new int[]{2, 3, 10, 6, 3, 14}, 2)); // 26
+
+//        System.out.println(isPangram("abcdeijklmnopqrstuvwxyz"));
+//        System.out.println(isPangram("Sphinx of black quartz, judge my vow."));
+//        System.out.println(isPangram("Pack My Box With Five Dozen Liquor Jugs"));
     }
 
     public static double roundToHundredth(double num) {
@@ -406,7 +431,7 @@ public class Main {
         for (int i = 0; i < word1Letters.length; i++) {
             boolean isSubstring = false;
             if (i + 1 < word1Letters.length) {
-                String subStr = word1Letters[i] + word1Letters[i +1];
+                String subStr = word1Letters[i] + word1Letters[i + 1];
                 isSubstring = word2ToCompare.contains(subStr);
             }
             if (isSubstring) {
@@ -414,5 +439,59 @@ public class Main {
             }
         }
         return false;
+    }
+
+    public static int calculateTotalTime(int[] customers, int checkout) {
+        if (customers.length == 0) {
+            return 0;
+        }
+        if (customers.length <= checkout) {
+            return Arrays.stream(customers).max().getAsInt();
+        }
+        if (checkout == 1) {
+            return Arrays.stream(customers).reduce(0, Integer::sum);
+        }
+        int[] firstSubArray = Arrays.copyOfRange(customers, 0, checkout);
+        int time = 0;
+        for (int i = checkout; i < customers.length; i++) {
+            int min = Arrays.stream(firstSubArray).min().getAsInt();
+            time += min;
+            int minValueIndex = 0;
+            for (int j = 0; j < firstSubArray.length; j++) {
+                if (firstSubArray[j] == min) {
+                    minValueIndex = j;
+                    break;
+                }
+            }
+            firstSubArray = Arrays.stream(firstSubArray).map(v -> v - min).toArray();
+            if (i + 1 < customers.length) {
+                firstSubArray[minValueIndex] = customers[i];
+            } else {
+                firstSubArray[minValueIndex] = customers[i];
+                time += Arrays.stream(firstSubArray).max().getAsInt();
+            }
+        }
+        return time;
+    }
+
+    public static boolean isPangram(String sentence) {
+        final String ABCLetters = "abcdefghijklmnopqrstuvwxyz";
+        List<String> letters = List.of(ABCLetters.split(""));
+//        if (sentence.isEmpty()) {
+//            return false;
+//        }
+//        Set<String> uniqueLetters = Arrays.stream(sentence.toLowerCase().split(""))
+//                .filter(s -> Character.isLetter(s.charAt(0)))
+//                .collect(Collectors.toSet());
+//        return uniqueLetters.size() == ABCLetters.length();
+        List<String> collect = Arrays.stream(sentence.toLowerCase().split(""))
+                .filter(s -> Character.isLetter(s.charAt(0)))
+                .toList();
+        for (String letter : letters) {
+            if (!collect.contains(letter)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
