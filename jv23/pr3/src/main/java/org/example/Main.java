@@ -56,20 +56,23 @@ public class Main {
 
 //        System.out.println(reverseBitsToInteger(417));
 
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(534976));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(17));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(528));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(6008));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(2));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(33));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(975));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(20550));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(1283331765));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(514));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(377));
-        System.out.println(NextBiggerNumber.getNextBiggerNumber(992575701));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(534976));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(17));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(528));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(6008));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(2));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(33));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(975));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(20550));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(1283331765));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(514));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(377));
+//        System.out.println(NextBiggerNumber.getNextBiggerNumber(992575701));
 
-//        System.out.println(IPAddresses.countIPBetween("20.0.0.10", "20.0.1.0"));
+        System.out.println(IPAddresses.countIPBetween("10.0.0.0", "10.0.0.50")); // Output: 50
+        System.out.println(IPAddresses.countIPBetween("10.0.0.0", "10.0.1.0"));  // Output: 256
+        System.out.println(IPAddresses.countIPBetween("20.0.0.10", "20.0.1.0")); // Output: 246
+
 //        int[][] m = new int[][]{
 //                {-2, 31, 6, 7},
 //                {15, -42, 1, 0},
@@ -104,6 +107,11 @@ public class Main {
 //        System.out.println(isPangram("abcdeijklmnopqrstuvwxyz"));
 //        System.out.println(isPangram("Sphinx of black quartz, judge my vow."));
 //        System.out.println(isPangram("Pack My Box With Five Dozen Liquor Jugs"));
+
+//        System.out.println(detectAutomorphic(1));
+//        System.out.println(detectAutomorphic(13));
+//        System.out.println(detectAutomorphic(76));
+//        System.out.println(detectAutomorphic(25));
     }
 
     public static double roundToHundredth(double num) {
@@ -493,5 +501,18 @@ public class Main {
             }
         }
         return true;
+    }
+
+    public static String detectAutomorphic(int number) {
+        String automorphic = "Automorphic";
+        String not = "Not!!";
+        String strFromNumber = String.valueOf(number);
+        String pow = String.valueOf(number * number);
+        if (strFromNumber.length() == pow.length()) {
+            return strFromNumber.equals(pow) ? automorphic : not;
+        } else {
+            String lastSymbols = pow.substring(pow.length() - strFromNumber.length());
+            return lastSymbols.equals(strFromNumber) ? automorphic : not;
+        }
     }
 }
