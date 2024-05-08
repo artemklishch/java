@@ -8,6 +8,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.Set;
+import java.util.function.IntUnaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
@@ -69,9 +70,9 @@ public class Main {
 //        System.out.println(NextBiggerNumber.getNextBiggerNumber(377));
 //        System.out.println(NextBiggerNumber.getNextBiggerNumber(992575701));
 
-        System.out.println(IPAddresses.countIPBetween("10.0.0.0", "10.0.0.50")); // Output: 50
-        System.out.println(IPAddresses.countIPBetween("10.0.0.0", "10.0.1.0"));  // Output: 256
-        System.out.println(IPAddresses.countIPBetween("20.0.0.10", "20.0.1.0")); // Output: 246
+//        System.out.println(IPAddresses.countIPBetween("10.0.0.0", "10.0.0.50")); // Output: 50
+//        System.out.println(IPAddresses.countIPBetween("10.0.0.0", "10.0.1.0"));  // Output: 256
+//        System.out.println(IPAddresses.countIPBetween("20.0.0.10", "20.0.1.0")); // Output: 246
 
 //        int[][] m = new int[][]{
 //                {-2, 31, 6, 7},
@@ -112,6 +113,32 @@ public class Main {
 //        System.out.println(detectAutomorphic(13));
 //        System.out.println(detectAutomorphic(76));
 //        System.out.println(detectAutomorphic(25));
+
+//        System.out.println(6<<2);
+
+//        System.out.println(getWinnerWord("alphabet"));
+//        System.out.println(getWinnerWord("i need a taxi"));
+//        System.out.println(getWinnerWord("a bb aaaa ca d"));
+
+//        System.out.println(Arrays.toString(getMultiples(2, 10)));
+
+//        System.out.println(extractFileName("1231231223123131_FILE_NAME.EXTENSION.OTHEREXTENSION"));
+
+//        System.out.println(Arrays.toString(capitalizeNames(new String[]{"MARIA"})));
+
+//        System.out.println(sortGiftCode("pqksuvy"));
+
+//        System.out.println(Arrays.toString(toReversedArray(14)));
+
+//        System.out.println(isSpecialNumber(0));
+
+//        System.out.println(Integer.toBinaryString(1));
+//        System.out.println(Integer.toBinaryString(2));
+//        System.out.println(Integer.toBinaryString(3));
+//        System.out.println(Integer.toBinaryString(4));
+//        System.out.println(Integer.toBinaryString(5));
+        System.out.println(Arrays.toString(getExtraPerfectNumbers(3)));
+        System.out.println(Arrays.toString(getExtraPerfectNumbers(7)));
     }
 
     public static double roundToHundredth(double num) {
@@ -514,5 +541,122 @@ public class Main {
             String lastSymbols = pow.substring(pow.length() - strFromNumber.length());
             return lastSymbols.equals(strFromNumber) ? automorphic : not;
         }
+    }
+
+    public static String getWinnerWord(String words) {
+        if (words.isEmpty()) {
+            return "";
+        }
+        String[] abcLetters = "abcdefghijklmnopqrstuvwxyz".split("");
+        Map<String, Integer> letterValues = new HashMap<>();
+                IntStream.range(0, abcLetters.length)
+                .forEach(i -> letterValues.put(abcLetters[i], i + 1));
+        String[] wordsArray = words.split(" ");
+        String result = "";
+        int wordCost = 0;
+        for (int i = 0; i < wordsArray.length; i++) {
+            String[] wordLetters = wordsArray[i].toLowerCase().split("");
+            int cost = 0;
+            for (int j = 0; j < wordLetters.length; j++) {
+                int letterValue = letterValues.get(wordLetters[j]);
+                cost += letterValue;
+            }
+            if (cost > wordCost) {
+                wordCost = cost;
+                result = wordsArray[i];
+            }
+        }
+        return result;
+    }
+
+    public static int[] getMultiples(int multiples, int number) {
+        int[] res = new int[multiples];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = (i + 1) * number;
+        }
+        return res;
+    }
+
+    public static String extractFileName(String dirtyFileName) {
+        int undescoreIndex = dirtyFileName.indexOf("_");
+        String noDateName = dirtyFileName.substring(undescoreIndex + 1);
+        String[] noDateParts = noDateName.split("\\.");
+        return noDateParts[0] + "." + noDateParts[1];
+    }
+
+    public static String toAlternativeCase(String string) {
+        String[] stringArray = string.split("");
+        String[] upperCaseStringArray = string.toUpperCase().split("");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < stringArray.length; i++) {
+            if (stringArray[i].equals(upperCaseStringArray[i])) {
+                stringBuilder.append(stringArray[i].toLowerCase());
+            } else {
+                stringBuilder.append(stringArray[i].toUpperCase());
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String[] capitalizeNames(String[] names) {
+        return Arrays.stream(names)
+                .map(n -> {
+                    String lowerCaseName = n.toLowerCase();
+                    return lowerCaseName.substring(0,1).toUpperCase() + lowerCaseName.substring(1);
+                }).toArray(String[]::new);
+    }
+
+    public static String sortGiftCode(String code) {
+        return Arrays.stream(code.split(""))
+                .sorted()
+                .collect(Collectors.joining());
+    }
+
+    public static int[] toReversedArray(long number) {
+        String[] numbers = new StringBuilder().append(number).reverse().toString().split("");
+        int[] array = new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            array[i] = Integer.parseInt(numbers[i]);
+        }
+        return array;
+    }
+
+    public static String isSpecialNumber(int number) {
+        Integer[] specialNumbers = new Integer[]{0,1,2,3,4,5};
+        List<Integer> list = Arrays.asList(specialNumbers);
+        String[] numberSymbols = String.valueOf(number).split("");
+        for (int i = 0; i < numberSymbols.length; i++) {
+            if (!list.contains(Integer.parseInt(numberSymbols[i]))) {
+                return "NOT!!";
+            }
+        }
+        return "Special!!";
+    }
+
+    public static IntUnaryOperator add(int n) {
+        return a -> n + a;
+    }
+
+    public static int findShortest(String string) {
+        int length = string.length();
+        String[] words = string.split(" ");
+        for (String word : words) {
+            int wordLength = word.length();
+            if (wordLength < length) {
+                length = wordLength;
+            }
+        }
+        return length;
+    }
+
+    public static int[] getExtraPerfectNumbers(int number) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i <= number; i++) {
+            String binaryNumber = Integer.toBinaryString(i);
+            if (binaryNumber.substring(0,1).equals(binaryNumber.substring(binaryNumber.length() - 1))) {
+                numbers.add(i);
+            }
+        }
+        return numbers.stream().mapToInt(Integer::intValue).toArray();
     }
 }
