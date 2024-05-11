@@ -137,8 +137,10 @@ public class Main {
 //        System.out.println(Integer.toBinaryString(3));
 //        System.out.println(Integer.toBinaryString(4));
 //        System.out.println(Integer.toBinaryString(5));
-        System.out.println(Arrays.toString(getExtraPerfectNumbers(3)));
-        System.out.println(Arrays.toString(getExtraPerfectNumbers(7)));
+//        System.out.println(Arrays.toString(getExtraPerfectNumbers(3)));
+//        System.out.println(Arrays.toString(getExtraPerfectNumbers(7)));
+
+        System.out.println(calculateMoves("west", "test"));
     }
 
     public static double roundToHundredth(double num) {
@@ -549,7 +551,7 @@ public class Main {
         }
         String[] abcLetters = "abcdefghijklmnopqrstuvwxyz".split("");
         Map<String, Integer> letterValues = new HashMap<>();
-                IntStream.range(0, abcLetters.length)
+        IntStream.range(0, abcLetters.length)
                 .forEach(i -> letterValues.put(abcLetters[i], i + 1));
         String[] wordsArray = words.split(" ");
         String result = "";
@@ -602,7 +604,7 @@ public class Main {
         return Arrays.stream(names)
                 .map(n -> {
                     String lowerCaseName = n.toLowerCase();
-                    return lowerCaseName.substring(0,1).toUpperCase() + lowerCaseName.substring(1);
+                    return lowerCaseName.substring(0, 1).toUpperCase() + lowerCaseName.substring(1);
                 }).toArray(String[]::new);
     }
 
@@ -622,7 +624,7 @@ public class Main {
     }
 
     public static String isSpecialNumber(int number) {
-        Integer[] specialNumbers = new Integer[]{0,1,2,3,4,5};
+        Integer[] specialNumbers = new Integer[]{0, 1, 2, 3, 4, 5};
         List<Integer> list = Arrays.asList(specialNumbers);
         String[] numberSymbols = String.valueOf(number).split("");
         for (int i = 0; i < numberSymbols.length; i++) {
@@ -653,10 +655,57 @@ public class Main {
         List<Integer> numbers = new ArrayList<>();
         for (int i = 1; i <= number; i++) {
             String binaryNumber = Integer.toBinaryString(i);
-            if (binaryNumber.substring(0,1).equals(binaryNumber.substring(binaryNumber.length() - 1))) {
+            if (binaryNumber.substring(0, 1).equals(binaryNumber.substring(binaryNumber.length() - 1))) {
                 numbers.add(i);
             }
         }
         return numbers.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    public static int calculateMoves(String word1, String word2) {
+        int steps = 0;
+        if (word1.equals(word2)) {
+            return steps;
+        }
+        int len1 = word1.length();
+        int len2 = word2.length();
+        int maxLength = Math.max(len1, len2);
+        String substring1 = word1;
+        String substring2 = word2;
+        for (int i = 0; i < maxLength; i++) {
+            if (substring1.isEmpty() && !substring2.isEmpty()) {
+                substring2 = substring2.substring(1);
+                steps++;
+                if (substring1.equals(substring2)) {
+                    break;
+                }
+                continue;
+            }
+            if (!substring1.isEmpty() && substring2.isEmpty()) {
+                substring1 = substring1.substring(1);
+                steps++;
+                if (substring1.equals(substring2)) {
+                    break;
+                }
+                continue;
+            }
+
+            String temp1 = substring1.substring(1);
+            String temp2 = substring2.substring(1);
+            if (temp1.equals(substring2) || temp2.equals(substring1)) {
+                steps++;
+                break;
+            }
+            substring1 = temp1;
+            steps++;
+
+            substring2 = temp2;
+            steps++;
+
+            if (substring1.equals(substring2)) {
+                break;
+            }
+        }
+        return steps;
     }
 }
