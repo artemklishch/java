@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+//
 public class Main {
     private static final DecimalFormat decfor = new DecimalFormat("0.00");
     private static final String JUMPING = "Jumping!!";
