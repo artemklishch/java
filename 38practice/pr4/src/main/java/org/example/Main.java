@@ -12,6 +12,12 @@ public class Main {
 //        char[] chars = str.toCharArray();
 //        System.out.println(chars);
 //        System.out.println(new String(chars));
+
+//        System.out.println(WeightSort.orderWeights("78 92 100"));
+//        System.out.println(WeightSort.orderWeights("91 118"));
+//        System.out.println(WeightSort.orderWeights("45   67"));
+
+//        System.out.println(SquareMatrixMultiplication.multiplySquareMatrices());
     }
 
     public static String toSimplePigLatin(String string) {

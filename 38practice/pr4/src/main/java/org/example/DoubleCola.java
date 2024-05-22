@@ -63,16 +63,35 @@ public class DoubleCola {
 //        return new String((char[]) namesValues[n - 1]);
 //    }
 
+//    public static String getNthPerson(String[] names, int n) {
+//        if (n <= names.length) {
+//            return names[n - 1];
+//        }
+//        Queue<String> namesValues = new LinkedList<>(Arrays.asList(names));
+//        for (int i = 0; i < n; i++) {
+//            String name = namesValues.poll();
+//            namesValues.offer(name);
+//            namesValues.offer(name);
+//        }
+//        return namesValues.peek();
+//    }
+
     public static String getNthPerson(String[] names, int n) {
-        if (n <= names.length) {
-            return names[n - 1];
+        int length = names.length;
+
+        // n - 1, since we are working with 0-based index
+        n--;
+
+        // Find the cycle length where n falls into
+        int cycle = 1;
+        while (n >= length * cycle) {
+            n -= length * cycle;
+            cycle *= 2;
         }
-        Queue<String> namesValues = new LinkedList<>(Arrays.asList(names));
-        for (int i = 0; i < n; i++) {
-            String name = namesValues.poll();
-            namesValues.offer(name);
-            namesValues.offer(name);
-        }
-        return namesValues.peek();
+
+        // Determine the person at position n
+        int index = n / cycle;
+
+        return names[index];
     }
 }
