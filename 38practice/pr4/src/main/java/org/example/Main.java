@@ -18,6 +18,7 @@ public class Main {
 //        System.out.println(WeightSort.orderWeights("45   67"));
 
 //        System.out.println(SquareMatrixMultiplication.multiplySquareMatrices());
+
     }
 
     public static String toSimplePigLatin(String string) {
