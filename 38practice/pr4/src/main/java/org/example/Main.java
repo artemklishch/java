@@ -18,7 +18,10 @@ public class Main {
 //        System.out.println(WeightSort.orderWeights("45   67"));
 
 //        System.out.println(SquareMatrixMultiplication.multiplySquareMatrices());
+//        System.out.println(Mumbling.mumble("abcd"));
 
+//        System.out.println(NumberArray.getMaxSubarraySum(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        System.out.println(OddNumbers.getSumOfRow(2));
     }
 
     public static String toSimplePigLatin(String string) {

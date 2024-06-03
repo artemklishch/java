@@ -1,0 +1,13 @@
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> <!-- dialect -->
+        <property name="connection.url">jdbc:mysql://localhost:3306/ticket_app?serverTimeZone=UTC</property> <!-- source of DB -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property> <!-- driver -->
+        <property name="connection.username">artem</property> <!-- username to DB -->
+        <property name="connection.password">Pssmgk_82</property> <!-- password to DB -->
+        <property name="show_sql">true</property> <!-- we want to see SQL queries that Hiberbnate generates -->
+        <property name="hbm2ddl.auto">create-drop</property> <!-- create-drop - means recreating tables, validate - validates tables, better for production -->
+
+        <mapping class="org.example.model.Movie" /> <!-- path to the class -->
+    </session-factory>
+</hibernate-configuration>
