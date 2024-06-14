@@ -9,6 +9,5 @@
         <property name="hbm2ddl.auto">create-drop</property>
 
         <mapping class="org.example.model.User" />
-        <mapping class="org.example.model.Address" />
     </session-factory>
 </hibernate-configuration>

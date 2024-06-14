@@ -3,21 +3,33 @@ package org.example.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name ="users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private String login;
-    private String password;
-    private byte[] salt;
 
-    public String getLogin() {
-        return login;
+    @Column(name = "username")
+    private String userName;
+
+    public Address getAddress() {
+        return address;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Address address;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Long getId() {
@@ -28,28 +40,5 @@ public class User {
         this.id = id;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public byte[] getSalt() {
-        return salt;
-    }
-
-    public void setSalt(byte[] salt) {
-        this.salt = salt;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }
