@@ -1,0 +1,1 @@
+INSERT INTO `products` VALUES (2, 'iPhone 11');

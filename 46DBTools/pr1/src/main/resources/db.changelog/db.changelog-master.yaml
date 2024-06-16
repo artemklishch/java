@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: /db.changelog/changes/create-product-table.sql
+  - include:
+      file: /db.changelog/changes/insert-product-table.sql
+  - include:
+      file: /db.changelog/changes/add-price-column-to-products.sql
+  - include:
+      file: /db.changelog/changes/change-price-column-type.sql
