@@ -1,16 +1,15 @@
 package org.example.service.impl;
 
 import org.example.dao.ProductDao;
-import org.example.lib.Inject;
-import org.example.lib.Service;
 import org.example.model.Product;
 import org.example.service.ProductService;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    @Inject
+    @Autowired
     private ProductDao productDao;
 
     @Override
