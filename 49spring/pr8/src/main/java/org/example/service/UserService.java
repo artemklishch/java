@@ -5,7 +5,7 @@ import org.example.model.User;
 import java.util.List;
 
 public interface UserService {
-    void addUser(User user);
+    void add(User user);
 
     User get(Long id);
 

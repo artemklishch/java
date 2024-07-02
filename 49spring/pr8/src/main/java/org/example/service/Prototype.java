@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.time.LocalDateTime;
 
@@ -19,6 +20,11 @@ public class Prototype {
         creationTime = LocalDateTime.now();
     }
 
+    @PostConstruct
+    public void init() {
+        System.out.println("Prototype post construct");
+    }
+
     public LocalDateTime getCreationTime() {
         return creationTime;
     }
@@ -29,6 +35,6 @@ public class Prototype {
 
     @PreDestroy
     public void destroyBean() {
-        System.out.println("Singlton pre destroy called...");
+        System.out.println("Prototype pre destroy called...");
     }
 }
