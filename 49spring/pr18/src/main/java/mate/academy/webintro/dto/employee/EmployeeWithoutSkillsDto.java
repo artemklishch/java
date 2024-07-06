@@ -2,13 +2,10 @@ package mate.academy.webintro.dto.employee;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class EmployeeDto {
+public class EmployeeWithoutSkillsDto{
     private Long id;
     private String name;
     private String email;
     private Long departmentId;
-    private List<Long> skills;
 }

@@ -3,6 +3,7 @@ package mate.academy.webintro.service.employee;
 import lombok.RequiredArgsConstructor;
 import mate.academy.webintro.dto.employee.CreateEmployeeRequestDto;
 import mate.academy.webintro.dto.employee.EmployeeDto;
+import mate.academy.webintro.dto.employee.EmployeeWithoutSkillsDto;
 import mate.academy.webintro.exception.EntityNotFountException;
 //import mate.academy.webintro.mapper.EmployeeMapper;
 import mate.academy.webintro.mapper.EmployeeMapper;
@@ -27,10 +28,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.toDto(employeeRepository.save(employee));
     }
 
+    //    @Override
+//    public List<EmployeeDto> findAll() {
+//        return employeeRepository.findAll().stream()
+//                .map(employeeMapper::toDto)
+//                .toList();
+//    }
     @Override
-    public List<EmployeeDto> findAll() {
+    public List<EmployeeWithoutSkillsDto> findAll() {
         return employeeRepository.findAll().stream()
-                .map(employeeMapper::toDto)
+                .map(employeeMapper::toEmployeeWithoutSkillsDto)
                 .toList();
     }
 

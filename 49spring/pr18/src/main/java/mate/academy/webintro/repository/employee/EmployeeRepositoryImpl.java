@@ -31,15 +31,24 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         }
     }
 
-    @Override
-    public List<Employee> findAll() {
-        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
-            return entityManager.createQuery(
-                    "SELECT e FROM Employee e JOIN FETCH e.skills",
-                    Employee.class
-            ).getResultList();
-        }
+//    @Override
+//    public List<Employee> findAll() {
+//        try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+//            return entityManager.createQuery(
+//                    "SELECT e FROM Employee e JOIN FETCH e.skills", // це для ініціалізації скілів, щоб не було помилки LazyInitialisationException - скіли є в об'єкті працівника, тому їх також потрібно запитувати з БД
+//                    Employee.class
+//            ).getResultList();
+//        }
+//    }
+@Override
+public List<Employee> findAll() {
+    try (EntityManager entityManager = entityManagerFactory.createEntityManager()) {
+        return entityManager.createQuery(
+                "SELECT e FROM Employee e",
+                Employee.class
+        ).getResultList();
     }
+}
 
     @Override
     public Optional<Employee> findById(Long id) {

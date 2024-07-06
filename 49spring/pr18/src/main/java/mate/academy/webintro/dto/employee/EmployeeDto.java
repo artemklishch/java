@@ -10,5 +10,5 @@ public class EmployeeDto {
     private String name;
     private String email;
     private Long departmentId;
-    private List<Long> skills;
+    private List<Long> skillIds;
 }
