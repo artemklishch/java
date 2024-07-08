@@ -4,13 +4,10 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.webintro.dto.CreateEmployeeRequestDto;
 import mate.academy.webintro.dto.EmployeeDto;
 import mate.academy.webintro.exception.EntityNotFountException;
-//import mate.academy.webintro.mapper.EmployeeMapper;
 import mate.academy.webintro.mapper.EmployeeMapper;
 import mate.academy.webintro.model.Employee;
 import mate.academy.webintro.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -45,6 +42,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeDto> findAllByName(String name) {
-        return Collections.emptyList();
+        return employeeRepository.findAllByNameContainingIgnoreCase(name).stream()
+                .map(employeeMapper::toDto)
+                .toList();
     }
 }
