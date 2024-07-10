@@ -17,8 +17,8 @@ public class Product {
 
     private String title;
 
-//    @ToString.Exclude
-//    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToMany
     @JoinTable(
             name = "product_category",

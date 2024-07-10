@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-lastname-column-to-employees-table
+      author: mateacademy
+      changes:
+        - addColumn:
+            tableName: employees
+            columns:
+              - column:
+                  name: lastName
+                  type: varchar(255)
