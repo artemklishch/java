@@ -1,9 +1,11 @@
 package mate.academy.webintro.repository.phone;
 
 import lombok.RequiredArgsConstructor;
+import mate.academy.webintro.dto.PhoneSearchParameters;
 import mate.academy.webintro.model.Phone;
 import mate.academy.webintro.repository.SpecificationProvider;
 import mate.academy.webintro.repository.SpecificationProviderManager;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

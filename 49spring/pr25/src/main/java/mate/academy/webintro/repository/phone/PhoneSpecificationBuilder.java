@@ -3,14 +3,13 @@ package mate.academy.webintro.repository.phone;
 import lombok.RequiredArgsConstructor;
 import mate.academy.webintro.dto.PhoneSearchParameters;
 import mate.academy.webintro.model.Phone;
-import mate.academy.webintro.repository.SpecificationBuilder;
 import mate.academy.webintro.repository.SpecificationProviderManager;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class PhoneSpecificationBuilder implements SpecificationBuilder<Phone> {
+public class PhoneSpecificationBuilder implements PhoneSpecificationProviderManager.SpecificationBuilder<Phone> {
 //    @Autowired
 //    private SpecificationProviderManager<Phone> phoneSpecificationProviderManager;
 
