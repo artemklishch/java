@@ -1,4 +1,4 @@
 package mate.academy.webintro.dto;
 
-public class PhoneSearchParameters {
+public record PhoneSearchParameters(String[] models, String[] colors) {
 }

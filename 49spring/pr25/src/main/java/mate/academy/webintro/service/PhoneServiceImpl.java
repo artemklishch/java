@@ -3,10 +3,13 @@ package mate.academy.webintro.service;
 import lombok.RequiredArgsConstructor;
 import mate.academy.webintro.dto.CreatePhoneRequestDto;
 import mate.academy.webintro.dto.PhoneDto;
+import mate.academy.webintro.dto.PhoneSearchParameters;
 import mate.academy.webintro.exception.EntityNotFountException;
 import mate.academy.webintro.mapper.PhoneMapper;
 import mate.academy.webintro.model.Phone;
-import mate.academy.webintro.repository.PhoneRepository;
+import mate.academy.webintro.repository.phone.PhoneRepository;
+import mate.academy.webintro.repository.phone.PhoneSpecificationBuilder;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.List;
 public class PhoneServiceImpl implements PhoneService {
     private final PhoneRepository phoneRepository;
     private final PhoneMapper phoneMapper;
+    private final PhoneSpecificationBuilder phoneSpecificationBuilder;
 
     @Override
     public PhoneDto save(CreatePhoneRequestDto requestDto) {
@@ -42,5 +46,13 @@ public class PhoneServiceImpl implements PhoneService {
     @Override
     public void deleteById(Long id) {
         phoneRepository.deleteById(id);
+    }
+
+    @Override
+    public List<PhoneDto> search(PhoneSearchParameters params) {
+        Specification<Phone> build = phoneSpecificationBuilder.build(params);
+        return phoneRepository.findAll(build).stream()
+                .map(phoneMapper::toDto)
+                .toList();
     }
 }

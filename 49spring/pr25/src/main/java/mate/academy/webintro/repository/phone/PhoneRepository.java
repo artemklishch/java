@@ -1,4 +1,4 @@
-package mate.academy.webintro.repository;
+package mate.academy.webintro.repository.phone;
 
 import mate.academy.webintro.model.Phone;
 import org.springframework.data.jpa.repository.JpaRepository;

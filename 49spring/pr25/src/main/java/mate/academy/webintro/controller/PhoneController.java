@@ -3,6 +3,7 @@ package mate.academy.webintro.controller;
 import lombok.RequiredArgsConstructor;
 import mate.academy.webintro.dto.CreatePhoneRequestDto;
 import mate.academy.webintro.dto.PhoneDto;
+import mate.academy.webintro.dto.PhoneSearchParameters;
 import mate.academy.webintro.service.PhoneService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +37,10 @@ public class PhoneController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         phoneService.deleteById(id);
+    }
+
+    @GetMapping("/search")
+    public List<PhoneDto> search(PhoneSearchParameters searchParameters) {
+        return phoneService.search(searchParameters);
     }
 }
