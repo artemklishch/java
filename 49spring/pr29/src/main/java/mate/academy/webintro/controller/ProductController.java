@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.webintro.dto.CreateProductRequestDto;
 import mate.academy.webintro.dto.ProductDto;
 import mate.academy.webintro.service.ProductService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +18,18 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping
-    public List<ProductDto> findAll() {
-        return productService.findAll();
-    }
+//    @GetMapping
+//    public List<ProductDto> findAll(
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "5") int size
+//    ) {
+//        return productService.findAll();
+//    }
 
+    @GetMapping
+    public List<ProductDto> findAll(Pageable pageable) {
+        return productService.findAll(pageable);
+    }
 
     @GetMapping("/{id}")
     public ProductDto findById(@PathVariable Long id) {
