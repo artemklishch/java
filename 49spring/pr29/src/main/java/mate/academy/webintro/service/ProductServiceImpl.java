@@ -9,7 +9,6 @@ import mate.academy.webintro.model.Product;
 import mate.academy.webintro.repository.ProductRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,7 +25,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> findAll(Pageable pageable) {
-        System.out.println(pageable);
         return productRepository.findAll(pageable).stream()
                 .map(productMapper::toDto)
                 .toList();

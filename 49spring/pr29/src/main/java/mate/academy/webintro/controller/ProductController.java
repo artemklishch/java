@@ -1,5 +1,7 @@
 package mate.academy.webintro.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mate.academy.webintro.dto.CreateProductRequestDto;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Product management", description = "Endpoints for managing products")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/products")
@@ -27,6 +30,7 @@ public class ProductController {
 //    }
 
     @GetMapping
+    @Operation(summary = "Get all products", description = "Get a list of all products")
     public List<ProductDto> findAll(Pageable pageable) {
         return productService.findAll(pageable);
     }
@@ -38,6 +42,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create a new product", description = "Create a new product")
     public ProductDto create(@RequestBody @Valid CreateProductRequestDto requestDto) {
         return productService.save(requestDto);
     }
