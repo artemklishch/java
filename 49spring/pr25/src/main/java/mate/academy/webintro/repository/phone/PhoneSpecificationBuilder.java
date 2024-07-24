@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class PhoneSpecificationBuilder implements PhoneSpecificationProviderManager.SpecificationBuilder<Phone> {
+public class PhoneSpecificationBuilder implements SpecificationBuilder<Phone> {
 //    @Autowired
 //    private SpecificationProviderManager<Phone> phoneSpecificationProviderManager;
 

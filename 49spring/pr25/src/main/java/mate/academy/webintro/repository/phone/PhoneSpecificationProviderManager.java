@@ -14,13 +14,13 @@ import java.util.List;
 @Component
 public class PhoneSpecificationProviderManager implements SpecificationProviderManager<Phone> {
 //    @Autowired
-//    private List<SpecificationProvider<Phone>> phoneSpecificationProviderProviders;
+//    private List<SpecificationProvider<Phone>> phoneSpecificationProviders;
 
-    private final List<SpecificationProvider<Phone>> phoneSpecificationProviderProviders;
+    private final List<SpecificationProvider<Phone>> phoneSpecificationProviders;
 
     @Override
     public SpecificationProvider<Phone> getSpecificationProvider(String key) {
-        return phoneSpecificationProviderProviders.stream()
+        return phoneSpecificationProviders.stream()
                 .filter(p -> p.getKey().equals(key))
                 .findFirst()
                 .orElseThrow(
