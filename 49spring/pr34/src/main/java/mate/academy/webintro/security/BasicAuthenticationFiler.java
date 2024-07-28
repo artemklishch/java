@@ -5,8 +5,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import mate.academy.webintro.exception.BadCredentialException;
 import mate.academy.webintro.service.Authentication;
+import mate.academy.webintro.service.AuthenticationManager;
+import mate.academy.webintro.service.SecurityContextHolder;
 import mate.academy.webintro.service.UsernamePasswordAuthenticationToken;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
@@ -14,9 +17,11 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.Base64;
 
+@RequiredArgsConstructor
 @Component
 public class BasicAuthenticationFiler extends HttpFilter {
     private static final String AUTHORIZATION_SCHEMA_BASIC = "basic";
+    private final AuthenticationManager authenticationManager;
 
     @Override
     protected void doFilter(
@@ -36,6 +41,11 @@ public class BasicAuthenticationFiler extends HttpFilter {
         }
 
         Authentication authentication = getAuthentication(request);
+        if (!authenticationManager.isAuthenticated(authentication)) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401 status
+            return;
+        }
+        SecurityContextHolder.getSecurityContext().setAuthentication(authentication);
         chain.doFilter(request, response);
     }
 

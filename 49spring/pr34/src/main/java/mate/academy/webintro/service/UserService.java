@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface UserService {
     UserResponseDto register(UserRegistrationRequestDto requestDto) throws RegistrationException;
+
+    UserResponseDto getByMail(String email);
 }

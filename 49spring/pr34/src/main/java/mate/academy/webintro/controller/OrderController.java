@@ -2,7 +2,9 @@ package mate.academy.webintro.controller;
 
 import lombok.RequiredArgsConstructor;
 import mate.academy.webintro.dto.order.OrderDto;
+import mate.academy.webintro.service.Authentication;
 import mate.academy.webintro.service.OrderService;
+import mate.academy.webintro.service.SecurityContextHolder;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,9 @@ public class OrderController {
 
     @GetMapping
     public List<OrderDto> findAll(Pageable pageable) {
-        return orderService.findAll(pageable);
+        Authentication authentication = SecurityContextHolder
+                .getSecurityContext().getAuthentication();
+        String email = (String) authentication.getPrincipal();
+        return orderService.findAll(email, pageable);
     }
 }
