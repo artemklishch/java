@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-salt-column-to-users-table
+      author: artem
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: salt
+                  type: BLOB
+                  remarks: "A column to store salt for password hashing"

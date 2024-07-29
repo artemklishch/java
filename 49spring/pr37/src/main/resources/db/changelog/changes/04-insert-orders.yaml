@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-orders
+      author: artem
+      changes:
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  { name: user_id, value: 1 }
+              - column:
+                  { name: status, value: "NEW" }
+              - column:
+                  { name: order_date, valueDate: "2023-07-05" }
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  { name: user_id, value: 1 }
+              - column:
+                  { name: status, value: "PROCESSING" }
+              - column:
+                  { name: order_date, valueDate: "2023-07-06" }
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  { name: user_id, value: 1 }
+              - column:
+                  { name: status, value: "SHIPPED" }
+              - column:
+                  { name: order_date, valueDate: "2023-07-07" }
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  { name: user_id, value: 2 }
+              - column:
+                  { name: status, value: "NEW" }
+              - column:
+                  { name: order_date, valueDate: "2023-07-08" }
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  { name: user_id, value: 2 }
+              - column:
+                  { name: status, value: "PENDING" }
+              - column:
+                  { name: order_date, valueDate: "2023-07-09" }
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  { name: user_id, value: 2 }
+              - column:
+                  { name: status, value: "DELIVERED" }
+              - column:
+                  { name: order_date, valueDate: "2023-07-10" }
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  { name: user_id, value: 3 }
+              - column:
+                  { name: status, value: "NEW" }
+              - column:
+                  { name: order_date, valueDate: "2023-07-11" }
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  { name: user_id, value: 3 }
+              - column:
+                  { name: status, value: "CANCELED" }
+              - column:
+                  { name: order_date, valueDate: "2023-07-12" }
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  { name: user_id, value: 3 }
+              - column:
+                  { name: status, value: "SHIPPED" }
+              - column:
+                  { name: order_date, valueDate: "2023-07-13" }
