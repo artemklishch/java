@@ -9,10 +9,8 @@ import mate.academy.webintro.dto.user.UserResponseDto;
 import mate.academy.webintro.exception.RegistrationException;
 import mate.academy.webintro.security.AuthenticationService;
 import mate.academy.webintro.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +19,7 @@ public class AuthController {
     private final UserService userService;
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/registration")
+    @PostMapping("/registeration")
     public UserResponseDto registration(
             @RequestBody @Valid UserRegistrationRequestDto requestDto
     ) throws RegistrationException {

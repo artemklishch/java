@@ -27,6 +27,7 @@ public class OrderController {
 //    }
     @GetMapping
     public List<OrderDto> findAll(Authentication authentication, Pageable pageable) {
+//        Authentication authentication1 = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
         return orderService.findAll(user.getEmail(), pageable);
     }
