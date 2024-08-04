@@ -1,4 +1,4 @@
-package mate.academy.webintro.config;
+package main.java.mate.academy.webintro.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
