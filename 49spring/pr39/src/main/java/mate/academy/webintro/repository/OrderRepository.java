@@ -9,3 +9,26 @@ public interface OrderRepository extends
         JpaRepository<Order, Long> {
     List<Order> findAllByUserId(Long userId);
 }
+
+// package org.example.intro.repository.book;
+
+// import org.example.intro.model.Book;
+// import org.springframework.data.domain.Page;
+// import org.springframework.data.domain.Pageable;
+// import org.springframework.data.jpa.repository.EntityGraph;
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+// public interface BookRepository extends
+//         JpaRepository<Book, Long>,
+//         JpaSpecificationExecutor<Book>,
+//         PageAndSortingRepository<Book, Long> {
+//     @EntityGraph(attributePaths = "categories")
+//     Page<Book> findAll(Pageable pageable);
+
+//     @Query("SELECT b FROM Book b LEFT JOIN FETCH b.categories")
+//     List<Book> findAllBooks();
+
+// this is in order not to use fetch type EAGER
+// }
+
