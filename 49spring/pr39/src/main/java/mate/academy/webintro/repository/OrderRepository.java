@@ -20,15 +20,18 @@ public interface OrderRepository extends
 // import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 // public interface BookRepository extends
-//         JpaRepository<Book, Long>,
-//         JpaSpecificationExecutor<Book>,
-//         PageAndSortingRepository<Book, Long> {
-//     @EntityGraph(attributePaths = "categories")
-//     Page<Book> findAll(Pageable pageable);
+// JpaRepository<Book, Long>,
+// JpaSpecificationExecutor<Book>,
+// PageAndSortingRepository<Book, Long> {
+// @EntityGraph(attributePaths = "categories")
+// Page<Book> findAll(Pageable pageable);
 
-//     @Query("SELECT b FROM Book b LEFT JOIN FETCH b.categories")
-//     List<Book> findAllBooks();
+// @Query("SELECT b FROM Book b LEFT JOIN FETCH b.categories")
+// List<Book> findAllBooks();
+
+// @Query("SELECT DISTINCT b FROM Book b"
+// + " LEFT JOIN FETCH b.categories c WHERE c.id = :id")
+// List<Book> findBooksByCategoryId(Long id, Pageable pageable);
 
 // this is in order not to use fetch type EAGER
 // }
-
