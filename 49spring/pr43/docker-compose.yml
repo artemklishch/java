@@ -1,0 +1,94 @@
+version: "3.8"
+#
+#services:
+#  db:
+#    image: postgres
+#    restart: always
+#    ports:
+#      - "5433:5432"
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: password
+#      POSTGRES_DB: blog
+#      create_table: posts
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U postgres"]
+#      interval: 30s
+#      timeout: 30s
+#      retries: 3
+
+#services:
+#  postgresdb:
+##    platform: linux/arm64
+#    image: postgres
+#    restart: unless-stopped
+#    env_file: ./.env
+#    environment:
+#      - POSTGRES_USER=$POSTGRES_USER
+#      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+#      - POSTGRES_DB=$POSTGRES_DATABASE
+#    ports:
+#      - $POSTGRES_LOCAL_PORT:$POSTGRES_DOCKER_PORT
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U postgres"]
+#      interval: 30s
+#      timeout: 30s
+#      retries: 3
+#  app:
+#    depends_on:
+#      - postgresdb
+#    restart: on-failure
+#    image: posts-service
+#    build: .
+#    env_file: ./.env
+#    ports:
+#      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+#      - $DEBUG_PORT:$DEBUG_PORT
+#    environment:
+#      SPRING_APPLICATION_JSON: '{
+#        "spring.datasource.url" : "jdbc:postgresql://postgresdb:$POSTGRES_DOCKER_PORT/$POSTGRES_DATABASE",
+#        "spring.datasource.username" : "$POSTGRES_USER",
+#        "spring.datasource.password" : "$POSTGRES_PASSWORD",
+#        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect"
+#      }'
+#      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+
+
+# docker compose build - ця команда дозволить створити docker images на основі сервісів
+# які тут зазначені в конфігурації (в цьому прикладі - два docker images - postgres, app)
+
+
+services:
+  postgresdb:
+    image: postgres:13
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    ports:
+      - "${POSTGRES_LOCAL_PORT}:${POSTGRES_DOCKER_PORT}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+
+  app:
+    image: posts-service
+    depends_on:
+      postgresdb:
+        condition: service_healthy
+    restart: on-failure
+    build: .
+    env_file: .env
+    ports:
+      - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
+      - "${DEBUG_PORT}:${DEBUG_PORT}"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgresdb:${POSTGRES_DOCKER_PORT}/${POSTGRES_DATABASE}"
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: "org.hibernate.dialect.PostgreSQLDialect"
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
