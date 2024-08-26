@@ -1,0 +1,1 @@
+delete from products where title = 'Tomato' and price = 9.95;

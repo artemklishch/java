@@ -4,11 +4,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import mate.academy.webintro.dto.CreateProductRequestDto;
-import mate.academy.webintro.dto.ProductDto;
+import mate.academy.webintro.dto.product.CreateProductRequestDto;
+import mate.academy.webintro.dto.product.ProductDto;
 import mate.academy.webintro.service.ProductService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,14 +22,6 @@ public class ProductController {
 
     private final ProductService productService;
 
-//    @GetMapping
-//    public List<ProductDto> findAll(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "5") int size
-//    ) {
-//        return productService.findAll();
-//    }
-
     @GetMapping
     @Operation(summary = "Get all products", description = "Get a list of all products")
     public List<ProductDto> findAll(Pageable pageable) {
@@ -40,6 +33,7 @@ public class ProductController {
         return productService.findById(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new product", description = "Create a new product")

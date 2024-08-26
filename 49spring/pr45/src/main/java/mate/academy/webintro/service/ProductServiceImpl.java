@@ -1,14 +1,16 @@
 package mate.academy.webintro.service;
 
 import lombok.RequiredArgsConstructor;
-import mate.academy.webintro.dto.CreateProductRequestDto;
-import mate.academy.webintro.dto.ProductDto;
+import mate.academy.webintro.dto.product.CreateProductRequestDto;
+import mate.academy.webintro.dto.product.ProductDto;
 import mate.academy.webintro.exception.EntityNotFountException;
 import mate.academy.webintro.mapper.ProductMapper;
 import mate.academy.webintro.model.Product;
 import mate.academy.webintro.repository.ProductRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,6 +28,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> findAll(Pageable pageable) {
         return productRepository.findAll(pageable).stream()
+                .map(productMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<ProductDto> findAllByPriceBetween(BigDecimal fromPrice, BigDecimal toPrice, Pageable pageable) {
+        return productRepository.findAllByPriceBetween(fromPrice, toPrice, pageable).stream()
                 .map(productMapper::toDto)
                 .toList();
     }
