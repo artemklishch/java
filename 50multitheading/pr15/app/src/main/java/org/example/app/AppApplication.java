@@ -16,6 +16,7 @@ public class AppApplication {
 //            System.out.println("After waiting...");
 ////            lock.notify();
 //        }
+
         Thread thread = new Thread(() -> {
             System.out.println("Before notify..."); // 2
             synchronized (lock) {
