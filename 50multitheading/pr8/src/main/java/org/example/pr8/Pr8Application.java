@@ -25,7 +25,7 @@ public class Pr8Application {
         thread1.join();
         thread2.join();
 
-        System.out.println(counter.getCount()); // output can be less than 2000
+        System.out.println(counter.getCount()); // without this logic output can be less than 2000
     }
 
 }

@@ -30,7 +30,7 @@ public class Main {
         optional2.orElseThrow(() -> new RuntimeException("Can't find user"));// приймає supplier інтерфейс
 
 //        Optional<User> optional3 = dataBase.getById(11L);
-        optional3.get(); // returns NoSuchElementException by default (when user not found)
+//        optional3.get(); // returns NoSuchElementException by default (when user not found)
     }
 
     private static User getDefaultUser() {

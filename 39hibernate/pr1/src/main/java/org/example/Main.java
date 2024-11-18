@@ -18,7 +18,7 @@ public class Main {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", dbProperties);// 2
 
             String sql = "SELECT * FROM car WHERE id = ?";
-            PreparedStatement statement = connection.prepareStatement(sql); // підготовлений об'єкт для відправки запиту в БД
+            PreparedStatement statement = connection.prepareStatement(sql); // підготовлений об'єкт для відправлення запиту в БД
             // PreparedStatement - для запиту з динамічними параметрами, Statement - для статичного виразу, без динамічних параметрів
             statement.setLong(1, 1L); // 2
             // перший аргумент - це номе позиції, якщо рахувати по порядку знаки питання в рядку вище
