@@ -10,10 +10,10 @@
 //
 //    public static void main(String[] args) {
 //        CompletableFuture<String> future = create();
-////        future.thenAccept(System.out::println); // Hello mates!
-////        future.thenAccept(data -> System.out.println(data))
-////                .thenRun(() -> System.out.println("This never dies!")) // Runnable;
-////                .thenRun(() -> System.out.println("This really never dies!")); // Hello mates! This never dies! This really never dies!
+/// /        future.thenAccept(System.out::println); // Hello mates!
+/// /        future.thenAccept(data -> System.out.println(data))
+/// /                .thenRun(() -> System.out.println("This never dies!")) // Runnable;
+/// /                .thenRun(() -> System.out.println("This really never dies!")); // Hello mates! This never dies! This really never dies!
 //        future
 //                .thenApply(String::toUpperCase)
 //                .thenAccept(System.out::println); // HELLO MATES!
@@ -44,7 +44,7 @@ import java.util.concurrent.ExecutionException;
 @SpringBootApplication
 public class Pr24Application {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
 //        System.out.println("Before CF");
 //        try {
 //            System.out.println(create().get()); // блокуюча операця
@@ -64,6 +64,7 @@ public class Pr24Application {
 
         System.out.println("Before CF");
         System.out.println(create().getNow("dummy data"));
+//        System.out.println(create().get()); // блокує
         System.out.println("After CF"); // не очікує; Before CF dummy data After CF
     }
 

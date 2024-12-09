@@ -70,7 +70,7 @@ public class Pr22Application {
 //            Future<String> future = executorService.submit(callable);
 //            String value = null;
 //            try {
-//                value = future.get(); // виклик цього методу в цьому прикладі є блокуючим і потоки виконуються по черзі
+//                value = future.get(); // виклик цього методу в цьому прикладі є блокуючим
 //            } catch (InterruptedException | ExecutionException e) {
 //                throw new RuntimeException(e);
 //            }
