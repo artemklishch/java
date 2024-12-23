@@ -44,6 +44,8 @@ public class FileCreationWaitNotify {
             }
         }
 
+        // next expressions wait when previous code is executed - firstly - the thread, then the synchronised block that
+        // waits with the expression "lock.wait()"
         System.out.println("File creation detected by main thread. Proceeding with process");
         // perform operations on the file
 
